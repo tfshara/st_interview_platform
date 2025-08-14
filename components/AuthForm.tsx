@@ -108,7 +108,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         <div className="card-border w-full max-w-md mx-auto"> {/* max-w-md = 448px */}
             <div className="flex flex-col gap-4 py-8 card px-6"> {/* reduced gap, padding */}
                 <div className="flex flex-row gap-2 justify-center">
-                    <Image src="/logo.svg" alt="logo" height={32} width={38} />
+                    <Image src="/Aceprep.png" alt="logo" height={32} width={38} />
                     <h2 className="text-primary-100 text-lg">AcePrep</h2> {/* smaller text */}
                 </div>
 
