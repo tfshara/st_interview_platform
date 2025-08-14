@@ -359,7 +359,7 @@ const Agent = ({ userName, userId, type, questions,interviewId, feedbackId, }: A
     useEffect(() => {
         if (callStatus === CallStatus.FINISHED){
             if(type==='generate'){
-                router.push(`/feedback/${interviewId}`)
+                router.push('/')
             }
             else{
                 handleGenerateFeedback(messages)

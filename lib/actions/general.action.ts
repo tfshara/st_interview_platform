@@ -143,16 +143,35 @@ Provide:
     }
 }
 
-export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdParams): Promise<Feedback| null> {
-    const { interviewId,userId } = params;
-    const feedback = await db
-        .collection('feedback')
-        .where('interviewId', '==', interviewId)
-        .where('userId', '==', userId)
-        .limit(1)
-        .get();
-       if (feedback.empty) return null;
+// export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdParams): Promise<Feedback| null> {
+//     const { interviewId,userId } = params;
+//     const feedback = await db
+//         .collection('feedback')
+//         .where('interviewId', '==', interviewId)
+//         .where('userId', '==', userId)
+//         .limit(1)
+//         .get();
+//        if (feedback.empty) return null;
 
-  const feedbackDoc = feedback.docs[0];
-  return { id: feedbackDoc.id, ...feedbackDoc.data() } as Feedback;
+//   const feedbackDoc = feedback.docs[0];
+//   return { id: feedbackDoc.id, ...feedbackDoc.data() } as Feedback;
+// }
+export async function getFeedbackByInterviewId(params: {
+  interviewId: string;
+  userId: string;
+}): Promise<Feedback | null> {
+  const { interviewId, userId } = params;
+  
+  const feedbackDoc = await db.collection('feedback')
+    .where('interviewId', '==', interviewId)
+    .where('userId', '==', userId)
+    .limit(1)
+    .get();
+
+  if (feedbackDoc.empty) return null;
+
+  return {
+    id: feedbackDoc.docs[0].id,
+    ...feedbackDoc.docs[0].data()
+  } as Feedback;
 }
